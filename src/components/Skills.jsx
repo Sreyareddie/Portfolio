@@ -1,51 +1,47 @@
-import React from "react";
 import { motion } from "framer-motion";
 import Marquee from "react-fast-marquee";
 import { skills } from "../assets/user_data";
 
 const Skills = () => {
   return (
-    <motion.div
-      id="skills"
-      className="relative  border-t my-12 lg:my-24 border-[#25213b] w-full"
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      transition={{ duration: 1 }}
-    >
-      <div className="w-[100px] h-[100px] bg-violet-100 rounded-full absolute top-6 left-[42%] translate-x-1/2 filter blur-3xl opacity-20"></div>
+    <section id="skills" className="py-20 lg:py-32">
+      <div className="text-center mb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <div className="inline-block px-4 py-1.5 mb-6 text-sm font-medium text-violet-400 bg-violet-400/10 rounded-full border border-violet-400/20">
+            Skills & Tools
+          </div>
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
+            Technical <span className="text-gradient">Toolkit</span>
+          </h2>
+          <p className="text-slate-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
+            A comprehensive set of tools and technologies I use to bring ideas to life.
+          </p>
+        </motion.div>
+      </div>
 
-      <div className="flex justify-center -translate-y-[1px]">
-        <div className="w-3/4">
-          <div className="h-[1px] bg-gradient-to-r from-transparent via-violet-500 to-transparent w-full" />
-        </div>
-      </div>
-      <div className="flex justify-center my-5 lg:py-8">
-        <div className="flex items-center">
-          <span className="w-24 h-[2px] bg-[#1a1443]"></span>
-          <span className="bg-[#1a1443] w-fit text-white p-2 px-5 text-xl rounded-md">
-            Skills
-          </span>
-          <span className="w-24 h-[2px] bg-[#1a1443]"></span>
-        </div>
-      </div>
-      <div className="w-full my-2 pt-16">
+      <div className="w-full overflow-hidden">
         <Marquee
-          gradient={false}
-          speed={80}
+          gradient={true}
+          gradientColor={[10, 13, 26]}
+          gradientWidth={100}
+          speed={50}
           pauseOnHover={true}
-          pauseOnClick={true}
-          direction="left"
         >
           {skills.map((skill, index) => (
             <div
               key={index}
-              className="w-36 min-w-fit h-fit flex flex-col items-center justify-center transition-all duration-500 m-3 sm:m-5 rounded-lg group relative hover:scale-110 cursor-pointer"
+              className="px-4 sm:px-6 py-10 group"
             >
-              <div className="h-full w-full rounded-lg border border-[#1f223c] bg-[#11152c] shadow-none shadow-gray-50 group-hover:border-violet-500 transition-all duration-500 p-4">
-                <div className="flex justify-center text-5xl text-blue-400">
+              <div className="glass-card p-6 flex flex-col items-center justify-center min-w-[140px] transition-all duration-300 group-hover:bg-white/10 group-hover:-translate-y-2">
+                <div className="text-4xl text-violet-400 mb-3 transition-transform duration-300 group-hover:scale-110">
                   {skill.icon}
                 </div>
-                <p className="text-white text-sm sm:text-lg mt-3 text-center">
+                <p className="text-slate-300 text-sm font-medium">
                   {skill.name}
                 </p>
               </div>
@@ -53,7 +49,7 @@ const Skills = () => {
           ))}
         </Marquee>
       </div>
-    </motion.div>
+    </section>
   );
 };
 

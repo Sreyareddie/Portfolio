@@ -1,78 +1,90 @@
-import React from "react";
 import { motion } from "framer-motion";
 import { projectData } from "../assets/user_data";
 import { FaExternalLinkAlt, FaGithub } from "react-icons/fa";
 
 const Projects = () => {
   return (
-    <motion.div
-      id="projects"
-      className="relative w-4/5 border-t my-12 lg:my-24 border-[#25213b] "
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      transition={{ duration: 1 }}
-    >
-      <div className="w-[100px] h-[100px] bg-violet-100 rounded-full absolute top-6 left-[42%] translate-x-1/2 filter blur-3xl opacity-20"></div>
-
-      <div className="flex justify-center -translate-y-[1px]">
-        <div className="w-3/4">
-          <div className="h-[1px] bg-gradient-to-r from-transparent via-violet-500 to-transparent w-full" />
-        </div>
-      </div>
-
-      <div className="flex justify-center my-5 lg:py-8">
-        <div className="flex items-center">
-          <span className="w-24 h-[2px] bg-[#1a1443]"></span>
-          <span className="bg-[#1a1443] w-fit text-white p-2 px-5 text-xl rounded-md">
-            Projects
-          </span>
-          <span className="w-24 h-[2px] bg-[#1a1443]"></span>
-        </div>
+    <section id="projects" className="py-20 lg:py-32">
+      <div className="text-center mb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <div className="inline-block px-4 py-1.5 mb-6 text-sm font-medium text-violet-400 bg-violet-400/10 rounded-full border border-violet-400/20">
+            Projects Portfolio
+          </div>
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
+            Featured <span className="text-gradient">Work</span>
+          </h2>
+          <p className="text-slate-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
+            A selection of my recent work across web development and software engineering.
+          </p>
+        </motion.div>
       </div>
 
       <motion.div
-        className="grid md:grid-cols-2 lg:grid-cols-2 gap-8 px-6"
+        className="grid md:grid-cols-2 gap-8"
         initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
+        whileInView="show"
+        viewport={{ once: true, amount: 0.1 }}
         variants={{
           hidden: { opacity: 0 },
-          visible: { opacity: 1, transition: { staggerChildren: 0.2 } },
+          show: {
+            opacity: 1,
+            transition: { staggerChildren: 0.15 }
+          }
         }}
       >
         {projectData.map((project, index) => (
           <motion.div
             key={index}
-            className="bg-[#11152c] border border-[#25213b] rounded-xl p-6 shadow-md transition-all duration-500 group relative hover:scale-[1.05] hover:border-violet-500"
-            whileHover={{ scale: 1.05 }}
             variants={{
-              hidden: { opacity: 0, y: 50 },
-              visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+              hidden: { opacity: 0, y: 30 },
+              show: { opacity: 1, y: 0, transition: { duration: 0.6 } }
             }}
+            className="group relative glass-card glow-card p-10 transition-all duration-500 hover:-translate-y-2 overflow-hidden border-white/5 hover:border-violet-500/30 hover:bg-white/[0.08]"
           >
-            <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-violet-500 to-transparent" />
-            <div className="flex flex-col gap-4 mt-2">
-              <h3 className="text-xl font-semibold text-white">
+            {/* Background accent */}
+            <div className="absolute top-0 right-0 w-32 h-32 bg-violet-500/5 blur-3xl group-hover:bg-violet-500/10 transition-colors" />
+
+            <div className="relative z-10">
+              <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-violet-400 transition-colors">
                 {project.title}
               </h3>
-              <p className="text-gray-400">{project.description}</p>
-              <div className="flex text-xl text-violet-400 hover:text-violet-300 mt-5">
-                <a
-                  href={project.githubLink}
-                  className=" transition-all duration-300"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <FaGithub />
-                </a>
-                {project.livedemo && (
+              <div className="flex flex-wrap gap-2 mb-4">
+                {project.techs.map((tech, tid) => (
+                  <span key={tid} className="px-2 py-1 text-[10px] font-semibold text-violet-300 bg-violet-500/10 border border-violet-500/20 rounded-md uppercase tracking-wider">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+              <p className="text-slate-400 mb-6 leading-relaxed text-sm">
+                {project.description}
+              </p>
+
+              <div className="flex items-center gap-6">
+                {project.githubLink && project.githubLink !== "#" && (
+                  <a
+                    href={project.githubLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-slate-300 hover:text-white transition-colors"
+                  >
+                    <FaGithub size={20} />
+                    <span className="text-sm font-medium">Code</span>
+                  </a>
+                )}
+                {project.livedemo && project.livedemo !== "#" && (
                   <a
                     href={project.livedemo}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="bg-transparent pl-4 rounded-md transition"
+                    className="flex items-center gap-2 text-slate-300 hover:text-white transition-colors"
                   >
-                    <FaExternalLinkAlt />
+                    <FaExternalLinkAlt size={18} />
+                    <span className="text-sm font-medium">Live Demo</span>
                   </a>
                 )}
               </div>
@@ -80,7 +92,7 @@ const Projects = () => {
           </motion.div>
         ))}
       </motion.div>
-    </motion.div>
+    </section>
   );
 };
 

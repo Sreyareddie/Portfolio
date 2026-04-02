@@ -1,58 +1,92 @@
-import React, { useState } from "react";
-import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Hamburger from "hamburger-react";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const menuItems = ["About", "Skills", "Projects", "Education", "Contact"];
+  const [scrolled, setScrolled] = useState(false);
+  const menuItems = [
+    "About",
+    "Experience",
+    "Skills",
+    "Projects",
+    "Education",
+    "Contact",
+  ];
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <motion.nav
-      initial={{ y: -50, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.5 }}
-      className="fixed top-0 left-0 w-full z-50 bg-[#11152c] bg-opacity-90 backdrop-blur-md shadow-md py-4"
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
+        scrolled
+          ? "glass-nav shadow-2xl py-3 md:py-4"
+          : "bg-transparent border-transparent py-4 md:py-6"
+      }`}
     >
-      <div className="w-4/5 mx-auto flex justify-between items-center text-white">
-        <div className="text-2xl font-bold">My Portfolio</div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center text-white">
+        <div className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-violet-400 to-cyan-400">
+          Portfolio
+        </div>
 
-        <div className="hidden md:flex space-x-10">
+        <div className="hidden md:flex space-x-8">
           {menuItems.map((item, index) => (
             <a
               key={index}
               href={`#${item.toLowerCase()}`}
-              className="relative text-lg font-medium transition-all duration-300 hover:text-violet-400"
+              className="relative text-sm font-medium tracking-wide transition-all duration-300 hover:text-violet-400 group"
             >
               {item}
-              <span className="absolute left-0 bottom-[-3px] w-0 h-[2px] bg-violet-400 transition-all duration-300 hover:w-full"></span>
+              <span className="absolute left-0 bottom-[-4px] w-0 h-[2px] bg-violet-400 transition-all duration-300 group-hover:w-full"></span>
             </a>
           ))}
         </div>
 
         <div className="md:hidden">
-          <Hamburger toggled={isOpen} toggle={setIsOpen} color="white" />
+          <Hamburger
+            toggled={isOpen}
+            toggle={setIsOpen}
+            color="white"
+            size={24}
+          />
         </div>
       </div>
 
-      {isOpen && (
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3 }}
-          className="md:hidden absolute top-full left-0 w-full bg-[#11152c] bg-opacity-95 backdrop-blur-md py-4 flex flex-col items-center space-y-4"
-        >
-          {menuItems.map((item, index) => (
-            <a
-              key={index}
-              href={`#${item.toLowerCase()}`}
-              className="text-lg font-medium transition-all duration-300 hover:text-violet-400"
-              onClick={() => setIsOpen(false)}
-            >
-              {item}
-            </a>
-          ))}
-        </motion.div>
-      )}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+            className="md:hidden glass-nav shadow-2xl absolute top-full left-0 w-full overflow-hidden"
+          >
+            <div className="px-6 py-8 space-y-4">
+              {menuItems.map((item, index) => (
+                <motion.a
+                  key={index}
+                  href={`#${item.toLowerCase()}`}
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: index * 0.05 }}
+                  className="block text-lg font-medium text-slate-300 hover:text-violet-400 transition-colors"
+                  onClick={() => setIsOpen(false)}
+                >
+                  {item}
+                </motion.a>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.nav>
   );
 };
