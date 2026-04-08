@@ -178,7 +178,7 @@ export const contactLinks = [
 
 export const projectData = [
   {
-    title: "Winvale Automation Platform",
+    title: "Modifications Automation Platform",
     description:
       "A data automation system that streamlines complex contract management by automating the comparison of large-scale Excel price lists (100,000+ rows) using Python and Pandas, replacing slow manual workflows.",
     techs: ["Python", "Pandas", "FastAPI", "React", "AWS", "PostgreSQL", "Docker"],

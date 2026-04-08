@@ -13,7 +13,7 @@ const Particles = () => {
         duration: type === "star" ? `${2 + Math.random() * 3}s` : `${12 + Math.random() * 20}s`,
         size: type === "star" ? `${Math.random() * 2.5 + 1}px` : `${Math.random() * 5 + 2}px`,
         opacity: type === "star" ? 0.9 : 0.45,
-        color: type === "star" ? "bg-white" : "bg-violet-300",
+        color: type === "star" ? "bg-white" : "bg-blue-300",
       };
     }), []);
 
@@ -25,7 +25,7 @@ const Particles = () => {
           className={`absolute rounded-full ${p.color} ${
             p.type === "star" 
               ? "animate-twinkle shadow-[0_0_6px_2px_rgba(255,255,255,0.4)]" 
-              : "animate-particle blur-[1px] shadow-[0_0_8px_3px_rgba(167,139,250,0.3)]"
+              : "animate-particle blur-[1px] shadow-[0_0_8px_3px_rgba(96,165,250,0.25)]"
           }`}
           style={{
             left: p.left,
@@ -91,9 +91,9 @@ const Comet = () => {
         const alpha = progress * 0.85;
 
         const grad = ctx.createRadialGradient(pos.x, pos.y, 0, pos.x, pos.y, radius * 2.5);
-        grad.addColorStop(0, `rgba(220, 180, 255, ${alpha})`);
-        grad.addColorStop(0.4, `rgba(139, 92, 246, ${alpha * 0.6})`);
-        grad.addColorStop(1, `rgba(99, 38, 200, 0)`);
+        grad.addColorStop(0, `rgba(180, 215, 255, ${alpha})`);
+        grad.addColorStop(0.4, `rgba(96, 165, 250, ${alpha * 0.6})`);
+        grad.addColorStop(1, `rgba(30, 80, 200, 0)`);
 
         ctx.beginPath();
         ctx.arc(pos.x, pos.y, radius * 2.5, 0, Math.PI * 2);
@@ -106,8 +106,8 @@ const Comet = () => {
         const head = trail[0];
         const coreGrad = ctx.createRadialGradient(head.x, head.y, 0, head.x, head.y, 6);
         coreGrad.addColorStop(0, "rgba(255, 255, 255, 0.95)");
-        coreGrad.addColorStop(0.5, "rgba(200, 160, 255, 0.6)");
-        coreGrad.addColorStop(1, "rgba(139, 92, 246, 0)");
+        coreGrad.addColorStop(0.5, "rgba(160, 200, 255, 0.6)");
+        coreGrad.addColorStop(1, "rgba(96, 165, 250, 0)");
         ctx.beginPath();
         ctx.arc(head.x, head.y, 6, 0, Math.PI * 2);
         ctx.fillStyle = coreGrad;
@@ -143,24 +143,24 @@ const Background = ({ activeSection = "hero" }) => {
         className="absolute inset-0 bg-transition"
         style={{
           background: `
-            radial-gradient(circle at 20% 30%, rgba(124, 58, 237, 0.18), transparent 50%),
+            radial-gradient(circle at 20% 30%, rgba(37, 99, 235, 0.12), transparent 50%),
             radial-gradient(circle at 80% 70%, rgba(34, 211, 238, 0.10), transparent 50%),
-            radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.08), transparent 60%)
+            radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.06), transparent 60%)
           `
         }}
       />
       
       {/* Large Animating Blobs with improved visual depth */}
-      <div className="absolute top-[-10%] left-[-10%] w-[70%] h-[70%] rounded-full bg-violet-600/10 blur-[140px] animate-blob mix-blend-plus-lighter" />
-      <div className="absolute top-[20%] right-[-10%] w-[60%] h-[60%] rounded-full bg-indigo-600/10 blur-[130px] animate-blob animation-delay-2000" />
+      <div className="absolute top-[-10%] left-[-10%] w-[70%] h-[70%] rounded-full bg-blue-700/8 blur-[140px] animate-blob mix-blend-plus-lighter" />
+      <div className="absolute top-[20%] right-[-10%] w-[60%] h-[60%] rounded-full bg-indigo-700/8 blur-[130px] animate-blob animation-delay-2000" />
       <div className="absolute bottom-[-15%] left-[5%] w-[65%] h-[65%] rounded-full bg-cyan-600/10 blur-[130px] animate-blob animation-delay-4000" />
-      <div className="absolute top-[40%] left-[30%] w-[40%] h-[40%] rounded-full bg-pink-600/5 blur-[120px] animate-pulse-glow" />
+      <div className="absolute top-[40%] left-[30%] w-[40%] h-[40%] rounded-full bg-sky-600/5 blur-[120px] animate-pulse-glow" />
       
       {/* Aurora Effect */}
       <div 
         className="absolute inset-x-[-20%] top-[5%] h-[45rem] blur-[160px] opacity-40 animate-aurora bg-transition"
         style={{
-          background: `conic-gradient(from 180deg at 50% 50%, rgba(124, 58, 237, 0.18), rgba(99, 102, 241, 0.10), rgba(34, 211, 238, 0.12), rgba(124, 58, 237, 0.18))`
+          background: `conic-gradient(from 180deg at 50% 50%, rgba(37, 99, 235, 0.12), rgba(59, 130, 246, 0.08), rgba(34, 211, 238, 0.12), rgba(37, 99, 235, 0.12))`
         }}
       />
       
