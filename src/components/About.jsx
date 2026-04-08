@@ -63,8 +63,10 @@ const About = () => {
           <div className="space-y-4">
             {focusAreas.map((focus, index) => (
               <div key={index} className="glass-card p-6 group hover:bg-white/10 transition-all duration-300">
-                <div className="text-violet-400 text-2xl mb-3 group-hover:scale-110 transition-transform">
+                <div className="mb-3 flex h-8 w-8 items-center justify-center text-2xl leading-none text-violet-400">
+                  <div className="flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
                   {focus.icon}
+                  </div>
                 </div>
                 <h4 className="text-white font-bold mb-1">{focus.title}</h4>
                 <p className="text-slate-400 text-sm leading-relaxed">

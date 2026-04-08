@@ -2,17 +2,18 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Hamburger from "hamburger-react";
 
-const Navbar = () => {
+const MENU_ITEMS = [
+  "About",
+  "Experience",
+  "Skills",
+  "Projects",
+  "Education",
+  "Contact",
+];
+
+const Navbar = ({ activeSection }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const menuItems = [
-    "About",
-    "Experience",
-    "Skills",
-    "Projects",
-    "Education",
-    "Contact",
-  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -21,6 +22,7 @@ const Navbar = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
 
   return (
     <motion.nav
@@ -38,14 +40,24 @@ const Navbar = () => {
         </div>
 
         <div className="hidden md:flex space-x-8">
-          {menuItems.map((item, index) => (
+          {MENU_ITEMS.map((item, index) => (
             <a
               key={index}
               href={`#${item.toLowerCase()}`}
-              className="relative text-sm font-medium tracking-wide transition-all duration-300 hover:text-violet-400 group"
+              className={`relative text-sm font-medium tracking-wide transition-all duration-300 group ${
+                activeSection === item.toLowerCase()
+                  ? "text-violet-300"
+                  : "hover:text-violet-400"
+              }`}
             >
               {item}
-              <span className="absolute left-0 bottom-[-4px] w-0 h-[2px] bg-violet-400 transition-all duration-300 group-hover:w-full"></span>
+              <span
+                className={`absolute left-0 bottom-[-4px] h-[2px] bg-violet-400 transition-all duration-300 ${
+                  activeSection === item.toLowerCase()
+                    ? "w-full"
+                    : "w-0 group-hover:w-full"
+                }`}
+              />
             </a>
           ))}
         </div>
@@ -70,14 +82,18 @@ const Navbar = () => {
             className="md:hidden glass-nav shadow-2xl absolute top-full left-0 w-full overflow-hidden"
           >
             <div className="px-6 py-8 space-y-4">
-              {menuItems.map((item, index) => (
+              {MENU_ITEMS.map((item, index) => (
                 <motion.a
                   key={index}
                   href={`#${item.toLowerCase()}`}
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.05 }}
-                  className="block text-lg font-medium text-slate-300 hover:text-violet-400 transition-colors"
+                  className={`block rounded-xl px-4 py-3 text-lg font-medium transition-colors ${
+                    activeSection === item.toLowerCase()
+                      ? "bg-white/5 text-violet-300"
+                      : "text-slate-300 hover:bg-white/5 hover:text-violet-400"
+                  }`}
                   onClick={() => setIsOpen(false)}
                 >
                   {item}

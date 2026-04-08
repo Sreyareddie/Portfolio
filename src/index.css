@@ -10,9 +10,14 @@
 
 html,
 body {
-  @apply bg-[#101424] text-slate-200 selection:bg-violet-500/30 font-sans;
+  @apply text-slate-200 selection:bg-violet-500/30 font-sans;
   overflow-x: hidden;
   width: 100%;
+  scroll-behavior: smooth;
+}
+
+#root {
+  min-height: 100%;
 }
 
 @layer components {
@@ -35,28 +40,35 @@ body {
   .btn-primary {
     @apply px-8 py-3 rounded-full bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white font-medium transition-all duration-300 shadow-lg shadow-violet-500/20 hover:shadow-violet-500/40 transform hover:-translate-y-1;
   }
+
+  .section-label {
+    @apply inline-flex items-center gap-2 px-4 py-1.5 text-sm font-medium text-violet-300 bg-violet-400/10 rounded-full border border-violet-400/20;
+  }
+
+  .section-label::before {
+    content: "";
+    @apply h-2 w-2 rounded-full bg-violet-400 shadow-[0_0_12px_rgba(167,139,250,0.85)];
+  }
 }
 
 @keyframes blob {
-  0% {
-    transform: translate(0px, 0px) scale(1);
-  }
-
-  33% {
-    transform: translate(30px, -50px) scale(1.1);
-  }
-
-  66% {
-    transform: translate(-20px, 20px) scale(0.9);
-  }
-
-  100% {
-    transform: translate(0px, 0px) scale(1);
-  }
+  0% { transform: translate(0px, 0px) scale(1) rotate(0deg); }
+  33% { transform: translate(4% , -8%) scale(1.1) rotate(5deg); }
+  66% { transform: translate(-3%, 4%) scale(0.9) rotate(-5deg); }
+  100% { transform: translate(0px, 0px) scale(1) rotate(0deg); }
 }
 
 .animate-blob {
-  animation: blob 7s infinite;
+  animation: blob 12s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.05); }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 8s ease-in-out infinite;
 }
 
 .animation-delay-2000 {
@@ -65,4 +77,52 @@ body {
 
 .animation-delay-4000 {
   animation-delay: 4s;
+}
+
+@keyframes aurora {
+  0% { transform: translate3d(-5%, 0, 0) scale(1) rotate(0deg); opacity: 0.5; }
+  50% { transform: translate3d(5%, -3%, 0) scale(1.05) rotate(1deg); opacity: 0.7; }
+  100% { transform: translate3d(-5%, 0, 0) scale(1) rotate(0deg); opacity: 0.5; }
+}
+
+.animate-aurora {
+  animation: aurora 20s ease-in-out infinite;
+}
+
+@keyframes float-particle {
+  0% { transform: translateY(0) translateX(0); opacity: 0; }
+  20% { opacity: var(--opacity, 0.5); }
+  80% { opacity: var(--opacity, 0.5); }
+  100% { transform: translateY(-300px) translateX(30px); opacity: 0; }
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+.animate-particle {
+  animation: float-particle var(--duration, 20s) linear infinite;
+  animation-delay: var(--delay, 0s);
+}
+
+.animate-twinkle {
+  animation: twinkle var(--duration, 4s) ease-in-out infinite;
+  animation-delay: var(--delay, 0s);
+}
+
+.grain-texture::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.04;
+  pointer-events: none;
+  z-index: 1;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+.bg-transition {
+  transition: all 1.2s cubic-bezier(0.4, 0, 0.2, 1);
 }

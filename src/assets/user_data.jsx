@@ -29,6 +29,8 @@ import {
 export const heroData = {
   name: "SREYA GUJJA",
   title: "Full Stack & Java Developer",
+  location: "Hyderabad, India",
+  availability: "Open to Full Stack opportunities",
   subtitle:
     "Crafting scalable, efficient, and user-centric digital solutions with passion and precision.",
 };
@@ -148,6 +150,8 @@ export const contactLinks = [
   {
     id: "github",
     href: "https://github.com/Sreyareddie",
+    label: "GitHub",
+    value: "Explore my repositories",
     icon: (
       <FaGithub className="text-4xl text-gray-300 group-hover:text-violet-400" />
     ),
@@ -155,6 +159,8 @@ export const contactLinks = [
   {
     id: "linkedin",
     href: "https://www.linkedin.com/in/sreya-gujja-588545237/",
+    label: "LinkedIn",
+    value: "Connect professionally",
     icon: (
       <FaLinkedin className="text-4xl text-gray-300 group-hover:text-violet-400" />
     ),
@@ -162,6 +168,8 @@ export const contactLinks = [
   {
     id: "email",
     href: "https://mail.google.com/mail/?view=cm&fs=1&to=gujjasreya2000@gmail.com&su=Let's%20connect&body=Hi%20Let's%20Connect",
+    label: "Email",
+    value: "gujjasreya2000@gmail.com",
     icon: (
       <FaEnvelope className="text-4xl text-gray-300 group-hover:text-violet-400" />
     ),

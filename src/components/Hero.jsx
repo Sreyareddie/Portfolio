@@ -56,10 +56,10 @@ const Hero = () => {
         >
           <div className="relative w-full max-w-[280px] sm:max-w-md aspect-square mx-auto">
             {/* Decorative rings with better gradients */}
-            <div className="absolute inset-0 rounded-full border-2 border-violet-500/10 animate-[spin_15s_linear_infinite]" />
-            <div className="absolute inset-8 rounded-full border border-cyan-500/5 animate-[spin_20s_linear_infinite_reverse]" />
+            <div className="absolute inset-0 rounded-full border-2 border-violet-500/20 animate-[spin_15s_linear_infinite]" />
+            <div className="absolute inset-8 rounded-full border border-cyan-500/10 animate-[spin_20s_linear_infinite_reverse]" />
             
-            <div className="absolute inset-0 bg-gradient-to-br from-violet-500/10 to-transparent rounded-full blur-3xl -z-10" />
+            <div className="absolute inset-0 bg-gradient-to-br from-violet-600/20 via-transparent to-cyan-600/10 rounded-full blur-3xl -z-10 animate-pulse-glow" />
 
             <motion.img
               src={assets.hero}
@@ -80,9 +80,16 @@ const Hero = () => {
         transition={{ duration: 0.8, delay: 0.4 }}
       >
         {stats.map((stat, index) => (
-          <div
+          <motion.div
             key={index}
             className="glass-card p-6 text-center group hover:bg-white/10 transition-colors rounded-2xl"
+            animate={{ y: [0, -10, 0] }}
+            transition={{ 
+              duration: 4, 
+              repeat: Infinity, 
+              ease: "easeInOut",
+              delay: index * 0.5 
+            }}
           >
             <div className="text-3xl font-bold text-white group-hover:text-violet-400 transition-colors">
               {stat.value}
@@ -90,7 +97,7 @@ const Hero = () => {
             <div className="text-sm text-slate-500 uppercase tracking-wider mt-2 font-medium">
               {stat.label}
             </div>
-          </div>
+          </motion.div>
         ))}
       </motion.div>
     </section>
