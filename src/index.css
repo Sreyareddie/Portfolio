@@ -126,3 +126,20 @@ body {
 .bg-transition {
   transition: all 1.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
+
+@keyframes nebula-1 {
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.20; }
+  50% { transform: translate(3%, -4%) scale(1.08); opacity: 0.28; }
+}
+@keyframes nebula-2 {
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.15; }
+  50% { transform: translate(-4%, 3%) scale(1.06); opacity: 0.22; }
+}
+@keyframes nebula-3 {
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.20; }
+  50% { transform: translate(2%, -2%) scale(1.05); opacity: 0.26; }
+}
+
+.animate-nebula-1 { animation: nebula-1 18s ease-in-out infinite; }
+.animate-nebula-2 { animation: nebula-2 22s ease-in-out infinite; animation-delay: 3s; }
+.animate-nebula-3 { animation: nebula-3 26s ease-in-out infinite; animation-delay: 7s; }
