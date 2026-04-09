@@ -92,7 +92,7 @@ export const experiences = [
     id: 1,
     title: "Associate Engineer - L1",
     company: "YottaFlex AI Technologies",
-    duration: "Dec 2023 - Jan 2025",
+    duration: "Sep 2025 - Present",
     description:
       "Developed and scaled AI-powered web applications using AWS and modern backend frameworks.",
     highlights: [
